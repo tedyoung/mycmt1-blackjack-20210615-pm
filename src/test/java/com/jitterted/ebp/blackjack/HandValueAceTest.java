@@ -31,4 +31,15 @@ public class HandValueAceTest {
                 .isEqualTo(1 + 8 + 3);
     }
 
+    @Test
+    public void handWithOneAceAndOtherCardsEqualTo10ThenAceIsValuedAt11() throws Exception {
+        List<Card> cards = List.of(new Card(DUMMY_SUIT, "A"),
+                                   new Card(DUMMY_SUIT, "7"),
+                                   new Card(DUMMY_SUIT, "3"));
+        Hand hand = new Hand(cards);
+
+        assertThat(hand.value())
+                .isEqualTo(11 + 7 + 3);
+    }
+
 }

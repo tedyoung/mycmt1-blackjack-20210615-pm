@@ -30,14 +30,18 @@ public class Hand {
         // does the hand contain at least 1 Ace?
         boolean hasAce = cards
                 .stream()
-                .anyMatch(card -> card.rankValue() == 1);
+                .anyMatch(this::isAce);
 
         // if the total hand value <= 11, then count the Ace as 11 by adding 10
-        if (hasAce && handValue < 11) {
+        if (hasAce && handValue <= 11) {
             handValue += 10;
         }
 
         return handValue;
+    }
+
+    private boolean isAce(Card card) {
+        return card.rankValue() == 1;
     }
 
     Card firstCard() {
@@ -60,10 +64,12 @@ public class Hand {
     }
 
     boolean pushes(Hand hand) {
+        // require both hands to be NOT Busted
         return value() == hand.value();
     }
 
     boolean beats(Hand hand) {
+        // require both hands to be NOT Busted
         return hand.value() < value();
     }
 }
